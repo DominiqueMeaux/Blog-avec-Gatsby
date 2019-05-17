@@ -2,10 +2,20 @@ module.exports = {
   siteMetadata: {
     title: `B&Geek!!!`,
     description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
-    author: `@gatsbyjs`,
+    author: `Dominique Meaux`,
+    bio: `Dév Web Junior | Motivé et déterminé | A la recherche d'un contrat de 
+    professionnalisation pour devenir concepteur developpeur d'application
+     en alternance avec l'Epsi d'Arras.`,
+    authorImage: `https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png`,
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
+    `gatsby-plugin-netlify-cms`,
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: { name: `blog`, path: `${__dirname}/blog/`},
+    },
+    `gatsby-transformer-remark`,
     {
       resolve: "gatsby-plugin-less",
       options: {

@@ -1,25 +1,43 @@
 import React from 'react'
-import { Link } from 'gatsby'
+import { Link, StaticQuery, graphql } from 'gatsby'
 
-import { List, Avatar, } from 'antd';
+import { List, Avatar, Divider } from 'antd';
 
 const Bio = () => (
-    
-    <List.Item>
+    <StaticQuery
+        query={
+            graphql`
+            query {
+                site{
+                    siteMetadata{
+                        author
+                        bio
+                        authorImage
+                    }
+                }
+            }
+            `
+        }
+        render={data => (
+            <>
+                <Divider orientation='left'>Author</Divider>
+            <List.Item>
         <List.Item.Meta
             avatar={
                 <Avatar
                     size={64}
-                    src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
+                            src={data.site.siteMetadata.authorImage} />
             }
-            title={<Link to="/about">Dominique Meaux</Link>}
+                    title={<Link to="/about">{data.site.siteMetadata.author}</Link>}
             
-    description="Dév Web Junior | Motivé et déterminé | A la recherche d'un contrat de 
-    professionnalisation pour devenir concepteur developpeur d'application
-     en alternance avec l'Epsi d'Arras."
+                    description={data.site.siteMetadata.bio}
         
     />
-    </List.Item>
+                </List.Item>
+                </>
+        )}
+    />
+    
 )
 
 export default Bio
