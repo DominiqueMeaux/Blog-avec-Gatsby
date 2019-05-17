@@ -1,6 +1,7 @@
 backend:
-  name: test-repo
-  
+  name: github
+  repo: DominiqueMeaux/Blog-avec-Gatsby
+
  
 
 media_folder: static/assets
