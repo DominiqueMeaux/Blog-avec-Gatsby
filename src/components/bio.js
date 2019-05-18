@@ -24,7 +24,8 @@ const Bio = () => (
             <List.Item>
         <List.Item.Meta
             avatar={
-                <Avatar
+                            <Avatar
+                                alt={data.site.siteMetadata.author}
                     size={64}
                             src={data.site.siteMetadata.authorImage} />
             }

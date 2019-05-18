@@ -13,8 +13,8 @@ exports.createPages = ({ graphql, actions }) => {
     const { createPage } = actions
     //on importe les différents fichiers Markdown
     //avec allMarkdownRemark
-    return graphql(
-        `
+  return graphql(
+    `
       {
         allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
           edges {
@@ -28,21 +28,23 @@ exports.createPages = ({ graphql, actions }) => {
         }
       }
     `
-    ).then(result => {
-        console.log(JSON.stringify(result, null, 2))
-        //stocké la longue variable dans un const pour la réutiliser plus facilement
-        const posts = result.data.allMarkdownRemark.edges
-        //on créer une boucle autour des posts
-        posts.forEach(post => {
+  ).then(result => {
+    console.log(JSON.stringify(result, null, 2))
+    const posts = result.data.allMarkdownRemark.edges
 
-            createPage({
-                path: post.node.frontmatter.slug,
-                component: path.resolve(`./src/templates/post.js`),
-                context: {
-                    slug: post.node.frontmatter.slug,
+    posts.forEach((post, index) => {
+      const prev = index === posts.length - 1 ? null : posts[index + 1].node
+      const next = index === 0 ? null : posts[index - 1].node
 
-                },
-            })
-        })
+      createPage({
+        path: post.node.frontmatter.slug,
+        component: path.resolve(`./src/templates/post.js`),
+        context: {
+          slug: post.node.frontmatter.slug,
+          next,
+          prev,
+        },
+      })
     })
+  })
 }
