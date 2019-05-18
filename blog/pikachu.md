@@ -1,7 +1,7 @@
 ---
 slug: pikachu
 date: '2019-05-02'
-title: Pikachu top
+title: 'Pikachu '
 ---
 
 # Pikachu
